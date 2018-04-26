@@ -1,0 +1,69 @@
+
+/*
+application {
+  config {
+    baseName sullyBoot
+  }
+}
+*/
+
+entity Client {
+	name String required,
+    shortName String required min(3) max(8),
+    image ImageBlob
+}
+
+entity Project {
+	name String required,
+    shortName String required min(3) max(8),
+    image ImageBlob
+}
+
+entity NumeroAffaire {
+	name String required min(1) max(12)
+}
+
+entity Application {
+	name String required,
+    shortName String required min(3) max(8)
+    langagePrincipal Langage,
+    image ImageBlob
+}
+
+enum Langage {
+	JAVA, JAVASCRIPT, PHP, DOTNET, DELPHI, C, CPP, OTHER
+}
+
+entity Dependency {
+	name String required,
+    version String
+}
+
+entity Outil {
+    image ImageBlob,
+	category OutilCategory required,
+	name String required,
+    url String
+}
+
+enum OutilCategory {
+	CONCEPTION, DEVELOPPEMENT, TEST, PROJECT_MANAGEMENT,
+    DOCUMENT, ANALYSE, DEPLOIEMENT, SGBD, 
+    APPLICATION_SERVER, OTHER
+} 
+
+relationship OneToMany {
+	Client to Project,
+    Project to NumeroAffaire,
+	Project to Application,
+    Application to Dependency,
+    Application to Outil
+}
+
+
+// Set pagination options
+paginate Client, Project, NumeroAffaire, Application, Module, Dependency with pagination
+
+dto * with mapstruct
+
+service Client, Project, Application, Dependency, Outil with serviceClass
