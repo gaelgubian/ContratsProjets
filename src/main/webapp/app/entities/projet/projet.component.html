@@ -1,0 +1,81 @@
+<div>
+    <h2>
+        <span>Projets</span>
+        <button class="btn btn-primary float-right jh-create-entity create-projet" [routerLink]="['/', { outlets: { popup: ['projet-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Projet
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="projets">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nom"><span>Nom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nomCourt"><span>Nom Court</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="image"><span>Image</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="client.id"><span>Client</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projet of projets ;trackBy: trackId">
+                <td><a [routerLink]="['../projet', projet.id ]">{{projet.id}}</a></td>
+                <td>{{projet.nom}}</td>
+                <td>{{projet.nomCourt}}</td>
+                <td>
+                    <a *ngIf="projet.image" (click)="openFile(projet.imageContentType, projet.image)">
+                        <img [src]="'data:' + projet.imageContentType + ';base64,' + projet.image" style="max-height: 30px;" alt="projet image"/>
+                    </a>
+                    <span *ngIf="projet.image">{{projet.imageContentType}}, {{byteSize(projet.image)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="projet.client">
+                        <a [routerLink]="['../client', projet.client?.id ]" >{{projet.client?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../projet', projet.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="projets && projets.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+
+<div *ngIf="application">
+    <h2><span>Application</span> {{application.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{application.nom}}</span>
+        </dd>
+        <dt><span>Nom Court</span></dt>
+        <dd>
+            <span>{{application.nomCourt}}</span>
+        </dd>
+        <dt><span>Langage Principal</span></dt>
+        <dd>
+            <span>{{application.langagePrincipal}}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="application.image">
+                <a (click)="openFile(application.imageContentType, application.image)">
+                    <img [src]="'data:' + application.imageContentType + ';base64,' + application.image" style="max-width: 100%;" alt="application image"/>
+                </a>
+                {{application.imageContentType}}, {{byteSize(application.image)}}
+            </div>
+        </dd>
+        <dt><span>Projet</span></dt>
+        <dd>
+            <div *ngIf="application.projet">
+                <a [routerLink]="['/projet', application.projet?.id]">{{application.projet?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'application/'+ application.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

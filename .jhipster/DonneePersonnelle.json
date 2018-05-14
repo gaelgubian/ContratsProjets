@@ -1,0 +1,66 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "traitement",
+            "otherEntityName": "traitement",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "categorieFonctionnelle",
+            "fieldType": "CategorieFonctionnelle",
+            "fieldValues": "IDENTIFICATION_PERSONNELLE,IDENTIFICATION_ELECTRONIQUE,IDENTIFICATION_BIOMETRIQUE,OTHER"
+        },
+        {
+            "fieldName": "categorieRGPD",
+            "fieldType": "CategorieRGPD",
+            "fieldValues": "GENETIQUE,BIOMETRIQUE,SANTE,ORIGINE,OPINIOONS,CONVICTIONS,SYNDICALE,VIE_SEXUELLE,PENALE,SECRET_PROFESSIONNEL,COMMUNICATION_ELECTRONIQUE,LOCALISATION,FINANCIERE,AUTRE"
+        },
+        {
+            "fieldName": "source",
+            "fieldType": "Source",
+            "fieldValues": "PERSONNE,RELATION,CONSEILLER_PROFESSIONNEL,EMPLOYEUR,AUTRE_ENTREPRISE_PRIVEE,SERVICE_PUBLIC,JUSTICE_POLICE,SECURITEE_SOCIALE,BANQUE_ASSURANCE,MARKETING,AUTRE"
+        },
+        {
+            "fieldName": "vulnerable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "destinataire",
+            "fieldType": "Destinataire",
+            "fieldValues": "AUCUN,PERSONNE,RELATION,CONSEILLER_PROFESSIONNEL,EMPLOYEUR,AUTRE_ENTREPRISE_PRIVEE,SERVICE_PUBLIC,JUSTICE_POLICE,SECURITEE_SOCIALE,BANQUE_ASSURANCE,MARKETING,AUTRE"
+        },
+        {
+            "fieldName": "natureTransmissionPaysTiers",
+            "fieldType": "NatureTransmissionPaysTiers",
+            "fieldValues": "DECISION_ADEQUATION,GARANTIES_APPROPRIEES,REGLES_ENTREPRISE,DEROGATION,CONDITION_ARTICLE_49_2"
+        },
+        {
+            "fieldName": "delaiConservation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "echange",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180514163923",
+    "entityTableName": "donnee_personnelle",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

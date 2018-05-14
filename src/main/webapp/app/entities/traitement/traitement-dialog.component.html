@@ -1,0 +1,155 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTraitementLabel">Create or edit a Traitement</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!traitement.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="traitement.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="traitement.nom" required/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="traitement.description" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_finalite">Finalite</label>
+            <select class="form-control" name="finalite" [(ngModel)]="traitement.finalite" id="field_finalite" >
+                <option value="GENERAL_ADMIN_PERSONNEL">GENERAL_ADMIN_PERSONNEL</option>
+                <option value="GENERAL_GESTION_PERSONNEL">GENERAL_GESTION_PERSONNEL</option>
+                <option value="GENERAL_PLANIF_ACTIVITE">GENERAL_PLANIF_ACTIVITE</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fondementTraitement">Fondement Traitement</label>
+            <select class="form-control" name="fondementTraitement" [(ngModel)]="traitement.fondementTraitement" id="field_fondementTraitement" >
+                <option value="CONSENTEMENT">CONSENTEMENT</option>
+                <option value="NECESSITE_CONTRACTUEL">NECESSITE_CONTRACTUEL</option>
+                <option value="OBLIGATION_LEGAL">OBLIGATION_LEGAL</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_typeTraitement">Type Traitement</label>
+            <select class="form-control" name="typeTraitement" [(ngModel)]="traitement.typeTraitement" id="field_typeTraitement" >
+                <option value="NORMAL">NORMAL</option>
+                <option value="PROFILAGE_PREVISION">PROFILAGE_PREVISION</option>
+                <option value="JURIDIQUE">JURIDIQUE</option>
+                <option value="SURVEILLANCE">SURVEILLANCE</option>
+                <option value="GRANDE_ECHELLE">GRANDE_ECHELLE</option>
+                <option value="COMBINAISONS">COMBINAISONS</option>
+                <option value="EXERCICE_DROIT">EXERCICE_DROIT</option>
+                <option value="NOUVELLES_TECHNOLOGIES">NOUVELLES_TECHNOLOGIES</option>
+                <option value="SURVEILLANCE_PUBLIC">SURVEILLANCE_PUBLIC</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sousTraitant">Sous Traitant</label>
+            <input type="text" class="form-control" name="sousTraitant" id="field_sousTraitant"
+                [(ngModel)]="traitement.sousTraitant" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_technologie">Technologie</label>
+            <input type="text" class="form-control" name="technologie" id="field_technologie"
+                [(ngModel)]="traitement.technologie" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_risque">Risque</label>
+            <input type="text" class="form-control" name="risque" id="field_risque"
+                [(ngModel)]="traitement.risque" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mesureSecurite">Mesure Securite</label>
+            <input type="text" class="form-control" name="mesureSecurite" id="field_mesureSecurite"
+                [(ngModel)]="traitement.mesureSecurite" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_documentation">Documentation</label>
+            <input type="text" class="form-control" name="documentation" id="field_documentation"
+                [(ngModel)]="traitement.documentation" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_aipd">Aipd</label>
+            <input type="text" class="form-control" name="aipd" id="field_aipd"
+                [(ngModel)]="traitement.aipd" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_information">Information</label>
+            <input type="text" class="form-control" name="information" id="field_information"
+                [(ngModel)]="traitement.information" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_procedureExerciceDroits">Procedure Exercice Droits</label>
+            <input type="text" class="form-control" name="procedureExerciceDroits" id="field_procedureExerciceDroits"
+                [(ngModel)]="traitement.procedureExerciceDroits" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_remarques">Remarques</label>
+            <input type="text" class="form-control" name="remarques" id="field_remarques"
+                [(ngModel)]="traitement.remarques" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateDebut">Date Debut</label>
+            <div class="input-group">
+                <input id="field_dateDebut" type="text" class="form-control" name="dateDebut" ngbDatepicker  #dateDebutDp="ngbDatepicker" [(ngModel)]="traitement.dateDebut"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateFin">Date Fin</label>
+            <div class="input-group">
+                <input id="field_dateFin" type="text" class="form-control" name="dateFin" ngbDatepicker  #dateFinDp="ngbDatepicker" [(ngModel)]="traitement.dateFin"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateFinDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateMAJ">Date MAJ</label>
+            <div class="input-group">
+                <input id="field_dateMAJ" type="text" class="form-control" name="dateMAJ" ngbDatepicker  #dateMAJDp="ngbDatepicker" [(ngModel)]="traitement.dateMAJ"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateMAJDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_application">Application</label>
+            <select class="form-control" id="field_application" name="application" [(ngModel)]="traitement.application" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="applicationOption.id === traitement.application?.id ? traitement.application : applicationOption" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

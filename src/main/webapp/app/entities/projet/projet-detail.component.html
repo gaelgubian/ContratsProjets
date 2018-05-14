@@ -1,0 +1,45 @@
+
+<div *ngIf="projet">
+    <h2><span>Projet</span> {{projet.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{projet.nom}}</span>
+        </dd>
+        <dt><span>Nom Court</span></dt>
+        <dd>
+            <span>{{projet.nomCourt}}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="projet.image">
+                <a (click)="openFile(projet.imageContentType, projet.image)">
+                    <img [src]="'data:' + projet.imageContentType + ';base64,' + projet.image" style="max-width: 100%;" alt="projet image"/>
+                </a>
+                {{projet.imageContentType}}, {{byteSize(projet.image)}}
+            </div>
+        </dd>
+        <dt><span>Client</span></dt>
+        <dd>
+            <div *ngIf="projet.client">
+                <a [routerLink]="['/client', projet.client?.id]">{{projet.client?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

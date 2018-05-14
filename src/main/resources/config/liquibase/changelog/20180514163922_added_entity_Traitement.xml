@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Traitement.
+    -->
+    <changeSet id="20180514163922-1" author="jhipster">
+        <createTable tableName="traitement">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="finalite" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fondement_traitement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="type_traitement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sous_traitant" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="technologie" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="risque" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mesure_securite" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="documentation" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="aipd" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="information" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="procedure_exercice_droits" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="remarques" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_debut" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_fin" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_maj" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="application_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -1,0 +1,39 @@
+
+<div *ngIf="client">
+    <h2><span>Client</span> {{client.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{client.nom}}</span>
+        </dd>
+        <dt><span>Nom Court</span></dt>
+        <dd>
+            <span>{{client.nomCourt}}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="client.image">
+                <a (click)="openFile(client.imageContentType, client.image)">
+                    <img [src]="'data:' + client.imageContentType + ';base64,' + client.image" style="max-width: 100%;" alt="client image"/>
+                </a>
+                {{client.imageContentType}}, {{byteSize(client.image)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'client/'+ client.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

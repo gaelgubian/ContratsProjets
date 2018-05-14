@@ -1,0 +1,96 @@
+
+<div *ngIf="traitement">
+    <h2><span>Traitement</span> {{traitement.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{traitement.nom}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{traitement.description}}</span>
+        </dd>
+        <dt><span>Finalite</span></dt>
+        <dd>
+            <span>{{traitement.finalite}}</span>
+        </dd>
+        <dt><span>Fondement Traitement</span></dt>
+        <dd>
+            <span>{{traitement.fondementTraitement}}</span>
+        </dd>
+        <dt><span>Type Traitement</span></dt>
+        <dd>
+            <span>{{traitement.typeTraitement}}</span>
+        </dd>
+        <dt><span>Sous Traitant</span></dt>
+        <dd>
+            <span>{{traitement.sousTraitant}}</span>
+        </dd>
+        <dt><span>Technologie</span></dt>
+        <dd>
+            <span>{{traitement.technologie}}</span>
+        </dd>
+        <dt><span>Risque</span></dt>
+        <dd>
+            <span>{{traitement.risque}}</span>
+        </dd>
+        <dt><span>Mesure Securite</span></dt>
+        <dd>
+            <span>{{traitement.mesureSecurite}}</span>
+        </dd>
+        <dt><span>Documentation</span></dt>
+        <dd>
+            <span>{{traitement.documentation}}</span>
+        </dd>
+        <dt><span>Aipd</span></dt>
+        <dd>
+            <span>{{traitement.aipd}}</span>
+        </dd>
+        <dt><span>Information</span></dt>
+        <dd>
+            <span>{{traitement.information}}</span>
+        </dd>
+        <dt><span>Procedure Exercice Droits</span></dt>
+        <dd>
+            <span>{{traitement.procedureExerciceDroits}}</span>
+        </dd>
+        <dt><span>Remarques</span></dt>
+        <dd>
+            <span>{{traitement.remarques}}</span>
+        </dd>
+        <dt><span>Date Debut</span></dt>
+        <dd>
+            <span>{{traitement.dateDebut | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Date Fin</span></dt>
+        <dd>
+            <span>{{traitement.dateFin | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Date MAJ</span></dt>
+        <dd>
+            <span>{{traitement.dateMAJ | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Application</span></dt>
+        <dd>
+            <div *ngIf="traitement.application">
+                <a [routerLink]="['/application', traitement.application?.id]">{{traitement.application?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'traitement/'+ traitement.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

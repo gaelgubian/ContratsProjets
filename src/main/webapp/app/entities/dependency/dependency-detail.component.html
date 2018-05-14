@@ -1,0 +1,36 @@
+
+<div *ngIf="dependency">
+    <h2><span>Dependency</span> {{dependency.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{dependency.nom}}</span>
+        </dd>
+        <dt><span>Version</span></dt>
+        <dd>
+            <span>{{dependency.version}}</span>
+        </dd>
+        <dt><span>Application</span></dt>
+        <dd>
+            <div *ngIf="dependency.application">
+                <a [routerLink]="['/application', dependency.application?.id]">{{dependency.application?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'dependency/'+ dependency.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
