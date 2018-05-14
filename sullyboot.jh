@@ -25,7 +25,7 @@ entity NumeroAffaire {
 
 entity Application {
 	name String required,
-    shortName String required min(3) max(8)
+    shortName String required min(3) max(8),
     langagePrincipal Langage,
     image ImageBlob
 }
