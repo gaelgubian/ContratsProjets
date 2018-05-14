@@ -42,6 +42,21 @@ public class CacheConfiguration {
             cm.createCache(fr.sully.boot.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(fr.sully.boot.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(fr.sully.boot.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Client.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Client.class.getName() + ".projets", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Projet.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Projet.class.getName() + ".numerosAffaires", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Projet.class.getName() + ".applications", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.NumeroAffaire.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Application.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Application.class.getName() + ".dependencies", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Application.class.getName() + ".outils", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Application.class.getName() + ".traitements", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Dependency.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Outil.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Traitement.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.Traitement.class.getName() + ".donneesPersonnelles", jcacheConfiguration);
+            cm.createCache(fr.sully.boot.domain.DonneePersonnelle.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,84 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myApplicationLabel">Create or edit a Application</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!application.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="application.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="application.nom" required/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nomCourt">Nom Court</label>
+            <input type="text" class="form-control" name="nomCourt" id="field_nomCourt"
+                [(ngModel)]="application.nomCourt" required/>
+            <div [hidden]="!(editForm.controls.nomCourt?.dirty && editForm.controls.nomCourt?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nomCourt?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_langagePrincipal">Langage Principal</label>
+            <select class="form-control" name="langagePrincipal" [(ngModel)]="application.langagePrincipal" id="field_langagePrincipal" >
+                <option value="JAVA">JAVA</option>
+                <option value="JAVASCRIPT">JAVASCRIPT</option>
+                <option value="PHP">PHP</option>
+                <option value="DOTNET">DOTNET</option>
+                <option value="DELPHI">DELPHI</option>
+                <option value="C">C</option>
+                <option value="CPP">CPP</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_image">Image</label>
+            <div>
+                <img [src]="'data:' + application.imageContentType + ';base64,' + application.image" style="max-height: 100px;" *ngIf="application.image" alt="application image"/>
+                <div *ngIf="application.image" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{application.imageContentType}}, {{byteSize(application.image)}}</span>
+                    <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_image" (change)="setFileData($event, application, 'image', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="application.image" />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="application.imageContentType" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_projet">Projet</label>
+            <select class="form-control" id="field_projet" name="projet" [(ngModel)]="application.projet" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="projetOption.id === application.projet?.id ? application.projet : projetOption" *ngFor="let projetOption of projets; trackBy: trackProjetById">{{projetOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

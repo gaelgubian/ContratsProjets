@@ -1,0 +1,49 @@
+
+<div *ngIf="outil">
+    <h2><span>Outil</span> {{outil.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="outil.image">
+                <a (click)="openFile(outil.imageContentType, outil.image)">
+                    <img [src]="'data:' + outil.imageContentType + ';base64,' + outil.image" style="max-width: 100%;" alt="outil image"/>
+                </a>
+                {{outil.imageContentType}}, {{byteSize(outil.image)}}
+            </div>
+        </dd>
+        <dt><span>Categorie</span></dt>
+        <dd>
+            <span>{{outil.categorie}}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{outil.nom}}</span>
+        </dd>
+        <dt><span>Url</span></dt>
+        <dd>
+            <span>{{outil.url}}</span>
+        </dd>
+        <dt><span>Application</span></dt>
+        <dd>
+            <div *ngIf="outil.application">
+                <a [routerLink]="['/application', outil.application?.id]">{{outil.application?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'outil/'+ outil.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

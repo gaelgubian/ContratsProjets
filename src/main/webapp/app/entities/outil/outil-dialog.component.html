@@ -1,0 +1,86 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myOutilLabel">Create or edit a Outil</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!outil.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="outil.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_image">Image</label>
+            <div>
+                <img [src]="'data:' + outil.imageContentType + ';base64,' + outil.image" style="max-height: 100px;" *ngIf="outil.image" alt="outil image"/>
+                <div *ngIf="outil.image" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{outil.imageContentType}}, {{byteSize(outil.image)}}</span>
+                    <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_image" (change)="setFileData($event, outil, 'image', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="outil.image" />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="outil.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_categorie">Categorie</label>
+            <select class="form-control" name="categorie" [(ngModel)]="outil.categorie" id="field_categorie"  required>
+                <option value="CONCEPTION">CONCEPTION</option>
+                <option value="DEVELOPPEMENT">DEVELOPPEMENT</option>
+                <option value="TEST">TEST</option>
+                <option value="MANAGEMENT">MANAGEMENT</option>
+                <option value="DOCUMENT">DOCUMENT</option>
+                <option value="ANALYSE">ANALYSE</option>
+                <option value="DEPLOIEMENT">DEPLOIEMENT</option>
+                <option value="SGBD">SGBD</option>
+                <option value="SERVER_APPLICATION">SERVER_APPLICATION</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+            <div [hidden]="!(editForm.controls.categorie?.dirty && editForm.controls.categorie?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.categorie?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="outil.nom" required/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_url">Url</label>
+            <input type="text" class="form-control" name="url" id="field_url"
+                [(ngModel)]="outil.url" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_application">Application</label>
+            <select class="form-control" id="field_application" name="application" [(ngModel)]="outil.application" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="applicationOption.id === outil.application?.id ? outil.application : applicationOption" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

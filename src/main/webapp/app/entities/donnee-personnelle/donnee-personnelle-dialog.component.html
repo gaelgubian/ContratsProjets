@@ -1,0 +1,135 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDonneePersonnelleLabel">Create or edit a Donnee Personnelle</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!donneePersonnelle.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="donneePersonnelle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="donneePersonnelle.nom" required/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_categorieFonctionnelle">Categorie Fonctionnelle</label>
+            <select class="form-control" name="categorieFonctionnelle" [(ngModel)]="donneePersonnelle.categorieFonctionnelle" id="field_categorieFonctionnelle" >
+                <option value="IDENTIFICATION_PERSONNELLE">IDENTIFICATION_PERSONNELLE</option>
+                <option value="IDENTIFICATION_ELECTRONIQUE">IDENTIFICATION_ELECTRONIQUE</option>
+                <option value="IDENTIFICATION_BIOMETRIQUE">IDENTIFICATION_BIOMETRIQUE</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_categorieRGPD">Categorie RGPD</label>
+            <select class="form-control" name="categorieRGPD" [(ngModel)]="donneePersonnelle.categorieRGPD" id="field_categorieRGPD" >
+                <option value="GENETIQUE">GENETIQUE</option>
+                <option value="BIOMETRIQUE">BIOMETRIQUE</option>
+                <option value="SANTE">SANTE</option>
+                <option value="ORIGINE">ORIGINE</option>
+                <option value="OPINIOONS">OPINIOONS</option>
+                <option value="CONVICTIONS">CONVICTIONS</option>
+                <option value="SYNDICALE">SYNDICALE</option>
+                <option value="VIE_SEXUELLE">VIE_SEXUELLE</option>
+                <option value="PENALE">PENALE</option>
+                <option value="SECRET_PROFESSIONNEL">SECRET_PROFESSIONNEL</option>
+                <option value="COMMUNICATION_ELECTRONIQUE">COMMUNICATION_ELECTRONIQUE</option>
+                <option value="LOCALISATION">LOCALISATION</option>
+                <option value="FINANCIERE">FINANCIERE</option>
+                <option value="AUTRE">AUTRE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_source">Source</label>
+            <select class="form-control" name="source" [(ngModel)]="donneePersonnelle.source" id="field_source" >
+                <option value="PERSONNE">PERSONNE</option>
+                <option value="RELATION">RELATION</option>
+                <option value="CONSEILLER_PROFESSIONNEL">CONSEILLER_PROFESSIONNEL</option>
+                <option value="EMPLOYEUR">EMPLOYEUR</option>
+                <option value="AUTRE_ENTREPRISE_PRIVEE">AUTRE_ENTREPRISE_PRIVEE</option>
+                <option value="SERVICE_PUBLIC">SERVICE_PUBLIC</option>
+                <option value="JUSTICE_POLICE">JUSTICE_POLICE</option>
+                <option value="SECURITEE_SOCIALE">SECURITEE_SOCIALE</option>
+                <option value="BANQUE_ASSURANCE">BANQUE_ASSURANCE</option>
+                <option value="MARKETING">MARKETING</option>
+                <option value="AUTRE">AUTRE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_vulnerable">Vulnerable</label>
+            <input type="checkbox" class="form-control" name="vulnerable" id="field_vulnerable"
+                [(ngModel)]="donneePersonnelle.vulnerable" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_destinataire">Destinataire</label>
+            <select class="form-control" name="destinataire" [(ngModel)]="donneePersonnelle.destinataire" id="field_destinataire" >
+                <option value="AUCUN">AUCUN</option>
+                <option value="PERSONNE">PERSONNE</option>
+                <option value="RELATION">RELATION</option>
+                <option value="CONSEILLER_PROFESSIONNEL">CONSEILLER_PROFESSIONNEL</option>
+                <option value="EMPLOYEUR">EMPLOYEUR</option>
+                <option value="AUTRE_ENTREPRISE_PRIVEE">AUTRE_ENTREPRISE_PRIVEE</option>
+                <option value="SERVICE_PUBLIC">SERVICE_PUBLIC</option>
+                <option value="JUSTICE_POLICE">JUSTICE_POLICE</option>
+                <option value="SECURITEE_SOCIALE">SECURITEE_SOCIALE</option>
+                <option value="BANQUE_ASSURANCE">BANQUE_ASSURANCE</option>
+                <option value="MARKETING">MARKETING</option>
+                <option value="AUTRE">AUTRE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_natureTransmissionPaysTiers">Nature Transmission Pays Tiers</label>
+            <select class="form-control" name="natureTransmissionPaysTiers" [(ngModel)]="donneePersonnelle.natureTransmissionPaysTiers" id="field_natureTransmissionPaysTiers" >
+                <option value="DECISION_ADEQUATION">DECISION_ADEQUATION</option>
+                <option value="GARANTIES_APPROPRIEES">GARANTIES_APPROPRIEES</option>
+                <option value="REGLES_ENTREPRISE">REGLES_ENTREPRISE</option>
+                <option value="DEROGATION">DEROGATION</option>
+                <option value="CONDITION_ARTICLE_49_2">CONDITION_ARTICLE_49_2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_delaiConservation">Delai Conservation</label>
+            <input type="text" class="form-control" name="delaiConservation" id="field_delaiConservation"
+                [(ngModel)]="donneePersonnelle.delaiConservation" required/>
+            <div [hidden]="!(editForm.controls.delaiConservation?.dirty && editForm.controls.delaiConservation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.delaiConservation?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_echange">Echange</label>
+            <input type="text" class="form-control" name="echange" id="field_echange"
+                [(ngModel)]="donneePersonnelle.echange" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_traitement">Traitement</label>
+            <select class="form-control" id="field_traitement" name="traitement" [(ngModel)]="donneePersonnelle.traitement" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="traitementOption.id === donneePersonnelle.traitement?.id ? donneePersonnelle.traitement : traitementOption" *ngFor="let traitementOption of traitements; trackBy: trackTraitementById">{{traitementOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

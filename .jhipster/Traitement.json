@@ -1,0 +1,99 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "application",
+            "otherEntityName": "application",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "donneesPersonnelles",
+            "otherEntityName": "donneePersonnelle",
+            "otherEntityRelationshipName": "traitement"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "finalite",
+            "fieldType": "Finalite",
+            "fieldValues": "GENERAL_ADMIN_PERSONNEL,GENERAL_GESTION_PERSONNEL,GENERAL_PLANIF_ACTIVITE,OTHER"
+        },
+        {
+            "fieldName": "fondementTraitement",
+            "fieldType": "FondementTraitement",
+            "fieldValues": "CONSENTEMENT,NECESSITE_CONTRACTUEL,OBLIGATION_LEGAL,OTHER"
+        },
+        {
+            "fieldName": "typeTraitement",
+            "fieldType": "TypeTraitement",
+            "fieldValues": "NORMAL,PROFILAGE_PREVISION,JURIDIQUE,SURVEILLANCE,GRANDE_ECHELLE,COMBINAISONS,EXERCICE_DROIT,NOUVELLES_TECHNOLOGIES,SURVEILLANCE_PUBLIC"
+        },
+        {
+            "fieldName": "sousTraitant",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "technologie",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "risque",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mesureSecurite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "documentation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "aipd",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "information",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "procedureExerciceDroits",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "remarques",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateDebut",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateMAJ",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180514163922",
+    "entityTableName": "traitement",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

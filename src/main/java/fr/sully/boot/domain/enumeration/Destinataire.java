@@ -1,0 +1,8 @@
+package fr.sully.boot.domain.enumeration;
+
+/**
+ * The Destinataire enumeration.
+ */
+public enum Destinataire {
+    AUCUN, PERSONNE, RELATION, CONSEILLER_PROFESSIONNEL, EMPLOYEUR, AUTRE_ENTREPRISE_PRIVEE, SERVICE_PUBLIC, JUSTICE_POLICE, SECURITEE_SOCIALE, BANQUE_ASSURANCE, MARKETING, AUTRE
+}

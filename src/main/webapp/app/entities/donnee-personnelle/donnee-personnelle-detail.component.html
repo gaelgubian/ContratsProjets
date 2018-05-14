@@ -1,0 +1,64 @@
+
+<div *ngIf="donneePersonnelle">
+    <h2><span>Donnee Personnelle</span> {{donneePersonnelle.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.nom}}</span>
+        </dd>
+        <dt><span>Categorie Fonctionnelle</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.categorieFonctionnelle}}</span>
+        </dd>
+        <dt><span>Categorie RGPD</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.categorieRGPD}}</span>
+        </dd>
+        <dt><span>Source</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.source}}</span>
+        </dd>
+        <dt><span>Vulnerable</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.vulnerable}}</span>
+        </dd>
+        <dt><span>Destinataire</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.destinataire}}</span>
+        </dd>
+        <dt><span>Nature Transmission Pays Tiers</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.natureTransmissionPaysTiers}}</span>
+        </dd>
+        <dt><span>Delai Conservation</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.delaiConservation}}</span>
+        </dd>
+        <dt><span>Echange</span></dt>
+        <dd>
+            <span>{{donneePersonnelle.echange}}</span>
+        </dd>
+        <dt><span>Traitement</span></dt>
+        <dd>
+            <div *ngIf="donneePersonnelle.traitement">
+                <a [routerLink]="['/traitement', donneePersonnelle.traitement?.id]">{{donneePersonnelle.traitement?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'donnee-personnelle/'+ donneePersonnelle.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
