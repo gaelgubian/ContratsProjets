@@ -1,31 +1,22 @@
-
-/*
-application {
-  config {
-    baseName sullyBoot
-  }
-}
-*/
-
 entity Client {
-	name String required,
-    shortName String required min(3) max(8),
+	nom String required,
+    nomCourt String required,
     image ImageBlob
 }
 
-entity Project {
-	name String required,
-    shortName String required min(3) max(8),
+entity Projet {
+	nom String required,
+    nomCourt String required,
     image ImageBlob
 }
 
 entity NumeroAffaire {
-	name String required min(1) max(12)
+	nom String required
 }
 
 entity Application {
-	name String required,
-    shortName String required min(3) max(8),
+	nom String required,
+    nomCourt String required,
     langagePrincipal Langage,
     image ImageBlob
 }
@@ -35,27 +26,27 @@ enum Langage {
 }
 
 entity Dependency {
-	name String required,
+	nom String required,
     version String
 }
 
 entity Outil {
     image ImageBlob,
-	category OutilCategory required,
-	name String required,
+	categorie CategorieOutil required,
+	nom String required,
     url String
 }
 
-enum OutilCategory {
-	CONCEPTION, DEVELOPPEMENT, TEST, PROJECT_MANAGEMENT,
+enum CategorieOutil {
+	CONCEPTION, DEVELOPPEMENT, TEST, MANAGEMENT,
     DOCUMENT, ANALYSE, DEPLOIEMENT, SGBD, 
-    APPLICATION_SERVER, OTHER
+    SERVER_APPLICATION, OTHER
 } 
 
 entity Traitement {
-	name String required,
+	nom String required,
     description String,
-    finality Finality,
+    finalite Finalite,
     fondementTraitement FondementTraitement,
     typeTraitement TypeTraitement,
     sousTraitant String,
@@ -73,9 +64,9 @@ entity Traitement {
 }
 
 entity DonneePersonnelle {
-	name String required,
-	categoryFonctionnelles CategoryFonctionnelles,
-	categoryRGPD CategoryRGPD,
+	nom String required,
+	categorieFonctionnelle CategorieFonctionnelle,
+	categorieRGPD CategorieRGPD,
     source Source,
     vulnerable Boolean,
     destinataire Destinataire,
@@ -84,14 +75,14 @@ entity DonneePersonnelle {
     echange String
 }
 
-enum Finality {
+enum Finalite {
 	GENERAL_ADMIN_PERSONNEL, GENERAL_GESTION_PERSONNEL, GENERAL_PLANIF_ACTIVITE, OTHER
 }
 enum FondementTraitement {
 	CONSENTEMENT, NECESSITE_CONTRACTUEL, OBLIGATION_LEGAL, OTHER
 }
 
-enum CategoryFonctionnelles {
+enum CategorieFonctionnelle {
 	IDENTIFICATION_PERSONNELLE, IDENTIFICATION_ELECTRONIQUE, IDENTIFICATION_BIOMETRIQUE, OTHER
 }
 
@@ -99,7 +90,7 @@ enum TypeTraitement {
 	NORMAL, PROFILAGE_PREVISION, JURIDIQUE, SURVEILLANCE, GRANDE_ECHELLE, COMBINAISONS, EXERCICE_DROIT, NOUVELLES_TECHNOLOGIES, SURVEILLANCE_PUBLIC
 }
 
-enum CategoryRGPD {
+enum CategorieRGPD {
 	GENETIQUE, BIOMETRIQUE, SANTE, ORIGINE, OPINIOONS, CONVICTIONS, SYNDICALE, VIE_SEXUELLE, PENALE, SECRET_PROFESSIONNEL, COMMUNICATION_ELECTRONIQUE, LOCALISATION, FINANCIERE, AUTRE
 }
 
@@ -116,18 +107,46 @@ enum NatureTransmissionPaysTiers {
 }
 
 relationship OneToMany {
-	Client to Project,
-    Project to NumeroAffaire,
-	Project to Application,
-    Application to Dependency,
-    Application to Outil,
-    Application to Traitement,
-    Traitement to DonneePersonnelle
+	Client{Projets} to Projet
+}
+
+relationship OneToMany {
+    Projet{numerosAffaires} to NumeroAffaire
+}
+
+relationship OneToMany {
+	Projet{applications} to Application
+}
+
+relationship OneToMany {
+    Application{dependencies} to Dependency
+}
+
+relationship OneToMany {
+    Application{outils} to Outil
+}
+
+relationship OneToMany {
+    Application{traitements} to Traitement
+}
+
+relationship OneToMany {
+    Traitement{donneesPersonnelles} to DonneePersonnelle
 }
 
 // Set pagination options
-paginate Client, Project, NumeroAffaire, Application, Module, Dependency, Traitement, DonneePersonnelle with pagination
+paginate Client with pagination
+paginate Projet with pagination
+paginate NumeroAffaire with pagination
+paginate Application with pagination
+paginate Dependency with pagination
+paginate Traitement with pagination
+paginate DonneePersonnelle with pagination
 
-//dto * with mapstruct
-
-service Client, Project, Application, Dependency, Outil, Traitement, DonneePersonnelle with serviceClass
+service Client with serviceClass
+service Projet with serviceClass
+service Application with serviceClass
+service Dependency with serviceClass
+service Outil with serviceClass
+service Traitement with serviceClass
+service DonneePersonnelle with serviceClass
