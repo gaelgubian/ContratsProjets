@@ -52,18 +52,82 @@ enum OutilCategory {
     APPLICATION_SERVER, OTHER
 } 
 
+entity Traitement {
+	name String required,
+    description String,
+    finality Finality,
+    fondementTraitement FondementTraitement,
+    typeTraitement TypeTraitement,
+    sousTraitant String,
+    technologie String,
+    risque String,
+    mesureSecurite String,
+    documentation String,
+    aipd String,
+    information String,
+    procedureExerciceDroits String,
+    remarques String,
+    dateDebut LocalDate,
+    dateFin LocalDate,
+    dateMAJ LocalDate 
+}
+
+entity DonneePersonnelle {
+	name String required,
+	categoryFonctionnelles CategoryFonctionnelles,
+	categoryRGPD CategoryRGPD,
+    source Source,
+    vulnerable Boolean,
+    destinataire Destinataire,
+	natureTransmissionPaysTiers NatureTransmissionPaysTiers,
+    delaiConservation String required,
+    echange String
+}
+
+enum Finality {
+	GENERAL_ADMIN_PERSONNEL, GENERAL_GESTION_PERSONNEL, GENERAL_PLANIF_ACTIVITE, OTHER
+}
+enum FondementTraitement {
+	CONSENTEMENT, NECESSITE_CONTRACTUEL, OBLIGATION_LEGAL, OTHER
+}
+
+enum CategoryFonctionnelles {
+	IDENTIFICATION_PERSONNELLE, IDENTIFICATION_ELECTRONIQUE, IDENTIFICATION_BIOMETRIQUE, OTHER
+}
+
+enum TypeTraitement {
+	NORMAL, PROFILAGE_PREVISION, JURIDIQUE, SURVEILLANCE, GRANDE_ECHELLE, COMBINAISONS, EXERCICE_DROIT, NOUVELLES_TECHNOLOGIES, SURVEILLANCE_PUBLIC
+}
+
+enum CategoryRGPD {
+	GENETIQUE, BIOMETRIQUE, SANTE, ORIGINE, OPINIOONS, CONVICTIONS, SYNDICALE, VIE_SEXUELLE, PENALE, SECRET_PROFESSIONNEL, COMMUNICATION_ELECTRONIQUE, LOCALISATION, FINANCIERE, AUTRE
+}
+
+enum Source {
+	PERSONNE, RELATION, CONSEILLER_PROFESSIONNEL, EMPLOYEUR, AUTRE_ENTREPRISE_PRIVEE, SERVICE_PUBLIC, JUSTICE_POLICE, SECURITEE_SOCIALE, BANQUE_ASSURANCE, MARKETING, AUTRE
+}
+
+enum Destinataire {
+	AUCUN, PERSONNE, RELATION, CONSEILLER_PROFESSIONNEL, EMPLOYEUR, AUTRE_ENTREPRISE_PRIVEE, SERVICE_PUBLIC, JUSTICE_POLICE, SECURITEE_SOCIALE, BANQUE_ASSURANCE, MARKETING, AUTRE
+}
+
+enum NatureTransmissionPaysTiers {
+	DECISION_ADEQUATION, GARANTIES_APPROPRIEES, REGLES_ENTREPRISE, DEROGATION, CONDITION_ARTICLE_49_2
+}
+
 relationship OneToMany {
 	Client to Project,
     Project to NumeroAffaire,
 	Project to Application,
     Application to Dependency,
-    Application to Outil
+    Application to Outil,
+    Application to Traitement,
+    Traitement to DonneePersonnelle
 }
 
-
 // Set pagination options
-paginate Client, Project, NumeroAffaire, Application, Module, Dependency with pagination
+paginate Client, Project, NumeroAffaire, Application, Module, Dependency, Traitement, DonneePersonnelle with pagination
 
-dto * with mapstruct
+//dto * with mapstruct
 
-service Client, Project, Application, Dependency, Outil with serviceClass
+service Client, Project, Application, Dependency, Outil, Traitement, DonneePersonnelle with serviceClass
